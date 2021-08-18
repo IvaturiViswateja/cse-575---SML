@@ -1,0 +1,29 @@
+Project Part-2
+Unsupervised Learning (K-means)
+Abstract:
+In this project I had implemented k-means algorithm using 2 different strategies of choosing the initial clusters to a dataset which contains a set of 2-D points. In strategy 1, the initial centers were picked randomly from the given samples while in strategy 2, the first center was picked randomly and for the i-th center (i>1) a sample was chosen amongst all possible samples such that the average distance of this chosen one to all previous (i-1) centers Is maximal. Each strategy was repeated 2 times with the number of clusters ranging from 2-10 and a plot between objective function VS number of clusters K under each strategy for each repetition was plotted to see the relationship between them.
+Objective Function: 
+ 
+The above formula describes the summation of square of distances of each sample data in a cluster from its centroid. This is done for all clusters and overall value denotes the value of objective function.
+Dataset: 
+The input 2D dataset consists of 300 rows and is loaded in ‘AllSamples.mat’ file.
+K-Means Clustering:
+Strategy 1:
+In this strategy we are picking the initial centers randomly from the given sample data. Since ‘K’ which represents number of centers starts from 2 till 10, I had defined 3 functions ‘euclidiandistance’, ‘centroidcalculation’ and ‘totalloss’ which does the total K-means computation. In euclidiandistance’ function, I had calculated the distance from each of initial centers from each sample and then picked the centroid which is nearer to the sample data. The ‘centroidcalculation’ function, recalibrates the centroid coordinates for each cluster by taking the sample data belong to each cluster and then calculates the mean of X and Y coordinates. ‘totalloss’ computes the objective function value for each K in {2,10} are computed. The below plot which shows the ‘objective function values’ vs ‘K’ summarizes the cost of the model for all centroids in consideration. Since I repeated the whole process, we have 2 plots for the sample data describing how the objective function value decreases for corresponding increase in K (number of centroids). These are called ‘Elbow Plots’ since the shape of the curve is decreasing proportional to increase in K and becomes stabilized or constant from a particular value of K.
+ 
+Figure 1
+ 
+Figure 2
+Strategy 2:
+In this strategy we are picking only 1 initial center randomly from the given sample data. For the i-th center (i>1), I choose a sample (among all possible samples) such that the average distance of this chosen one to all previous (i-1) centers is maximal. After this the process in K-means computation remain same to strategy 1. It can be observed from my .py file that this model generation takes much longer than strategy 1 since this involves computing the initial centers. The below plots which show the ‘objective function values’ vs ‘K’ summarizes the cost of the model for all centroids in consideration. 
+ 
+Figure 3
+ 
+Figure 4
+We can observe from the plots that the objective function value is decreasing proportional to increase in number of clusters and become constant for a sufficiently larger value of K.
+Conclusion:
+•	From the plots we can observe that different initialization of cluster centers results in different objective function values and their subsequent cluster centroids. 
+•	Randomly choosing the centers from the sample data proves to be a totally different model than choosing centers that are at maximal distance. 
+•	This is because the time required to generate the models are different with strategy 2 taking more time and observe the smooth decrease in objective function value proportional to increase in clusters. 
+•	This is because in strategy 2 we are choosing the centers which are at maximal distance. This sets apart the resulting clusters being distinct. But in strategy 1 since we are randomly choosing the centers, there is a possibility for the clusters to share some sample data points due to their proximity. 
+
