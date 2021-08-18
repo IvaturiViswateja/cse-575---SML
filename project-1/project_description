@@ -1,0 +1,58 @@
+Project Part-1
+Density Estimation and Classification using Fashion-MNIST
+
+Abstract:
+My main objective in this project is to classify the given images into T-shirt or Trouser. Input images are 28 x 28 pixels and I have 14,000 data points/images which can be used to train my model. I have extracted mean and standard deviation of each data point which are my input features and I have built logistic regression and naïve bayes classification models to perform the given task. For Naïve Bayes classifier, I need to do parameter estimation which I have done using Maximum likelihood estimation. During this process I have also plotted 2D gaussian distribution which gives a better sense of the input variables.
+Dataset:
+The input Fashion-MNIST dataset contains 12000 samples of training data and 2000 samples of test data. Training data contains 6000 samples for each T shirts and Trousers class. Test data contains 1000 samples for each T shirts and Trousers class. Labels 0 and 1 represent ‘t shirts’ and ‘trousers’ class respectively.
+Feature Extraction:
+Since 28 x 28 pixels amounts to 784 values, building a model with so many features take much time and memory. Hence, I have extracted mean, standard deviation of pixel values from each image which can be used as 2 input features while building a model. Let us name them as feature1, feature 2 for future addressing in this report.
+Parameter Estimation:
+Why do we need parameter estimation? While building a naïve bayes classifier we need to know the gaussian distribution from which our features (feature1, feature2) could be possibly drawn from. To find the distribution, we need to estimate its parameters (µ - mean, ∑ - covariance) using maximum likelihood estimation. There are 2 classes, one for Y=0 (T-shirts) and another for Y=1 (Trouser) and for each class we need to calculate the µ and ∑.
+Since there are 2 features in each class, we should build a 2D gaussian distribution (not taking into consideration that each feature is independent) for each class. Let (µ1, ∑1) and (µ2 ∑2) be the parameters for gaussian distribution for Y=0 and Y=1 respectively.
+ 
+Parameters for class 0:
+µ1= [0.32560777, 0.32003609]	∑1 = [ [0.01285387, 0.	],
+[0.	, 0.00774097] ]
+Parameters for class 1:
+
+µ2 = [0.22290531, 0.33394171]	∑2 = [ [0.00324342, 0.	],
+[0.	, 0.00325268] ]
+
+Naïve Bayes Classifier:
+In naïve Bayes classifier we estimate conditional probability as
+P(Y/X) α P(X/Y)*P(Y)
+Here P(Y/X) is called posterior probability P(X/Y) [likelihood] = P(X1,X2/Y)
+P(Y) [prior] = 0.5 (since there are equal number of samples for each class)
+We need to use the PDF to calculate the value of P(X1,X2/Y) values for each image which is given below -
+
+
+If P(Y=0/X)>P(Y=1/X) then we classify it as class 0 else as class 1. After classifying each image to either class 0 or class 1 based on the above discussion the accuracy of the model is as follows -
+Accuracy on train data: 82.38%	Accuracy on test data: 83.15%
+
+
+Logistic Regression:
+In Logistic regression we find log-likelihood function which is then sources to gradient ascent to find the weights which maximizes the log likelihood function. Gradient ascent is:
+
+Derivative of likelihood function with respect to θj is
+ 
+
+ 
+
+Where xj – Input feature matrix y – 0/1
+σ(θTx) and LL(θ) which is h(θT) are described in below picture
+
+We shall first initialize weights to 0 and then send the weights through gradient ascent which gives a new weight. Then add the initial weight with new weight which gives updated value. We repeat this loop for 100000 times which is called epoch. I first started with learning rate η = 0.1 and observed the accuracy of the model by comparing ycap and y(actual). Then by iteratively changing η, I found that at η=0.4, accuracy=92.55 which is highest. We use the above-mentioned steps on training data to calculate the weight vector and bias values.
+If σ(θTx) ≥ 0.5 then ycap is set to 1(class 1) else ycap=0 (class 0) Our model parameter are as follows:
+Weights= [ [ -720.64931423],
+[-9163.9049862 ],
+[ 9607.49304501] ]
+Bias (the first weight coefficient): -720.64931423
+learning rate η= 0.4
+No. of iterations: 100000
+ 
+Accuracy achieved using logistic regression: 92.55%
+
+
+Conclusion:
+From the above results and discussion, we observed that logistic regression performed better than naïve bayes on training and test data set. This is because we update weights which play a major role in predicting the dependent variable (Y) in logistic regression. By doing this we maximize the log likelihood function which leads to a better prediction and simulation of Y. Since in naïve bayes there is no modification of model parameters to maximize the likelihood function, we achieve sub optimal results.
