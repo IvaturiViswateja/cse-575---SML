@@ -1,0 +1,46 @@
+Project Part-3
+Classification Using Neural Networks and Deep Learning (SVHN Dataset)
+
+ABSTRACT:
+In this project I  built and trained a small convolutional neural network for classification task. The input is the SVHN dataset which consists of printed digits cropped from the house plate pictures belonging to 10 classes. The input RBG image resolution is 32 x 32 x 3 and I am required to build a convolution neural network with the below architecture and parameter setting.
+ 
+
+BUILDING MODEL:
+•	Since the input data set has 73,257 training samples and the convolution architecture is stacked with 3 hidden convolution layers, I need to use addition al GPU to run the model. Hence I developed my code on Google Collab and used Keras to build my model. Specifically in Keras, I have imported packages such as Sequential, Dense, Dropout and activation. 
+•	First and foremost I loaded the .mat data file and plotted 10 sample images from the dataset to see why we need a convolution neural network to analyze the images. You can clearly see that the images are not clear for any recognition system to parse.
+•	Since the label contains 10 classes, in order to develop the model I need to encode the output variable range. Hence I used keras function “to_categorical” to covert the output range into a one hot encoding.
+•	While building the model, I used a series of convolution layers of either 64/128 feature maps with stride 1, activation layers, batchnoramilzation layers and maxpooling layers with stride 2.
+•	I have also flattened out the output from hidden layers which goes as input to the fully connected network since flattening converts multidimensional data to 1-D
+•	Along with batch normalization I have also used Dropout so that the model does not overfit on the training data. I ‘ve only allowed 50& data from hidden layers to pass through the dense neural connections.
+Attached below is the model summary describing each hidden layer parameters along with a count of total trainable parameters for this model
+ 
+
+So, my model has to 31,795,658 parameters in order to make prediction on test data. I’ve started training the model with initial learning rate=0.01 over 20 epochs. Attached below are the train and validation dataset accuracies along with train and validation dataset loss of my model for different learning rates and epochs
+TRAINING THE MODEL:
+Explained below are the parameter optimization steps I have taken in order to improve the accuracy and reduce the loss of my model. I have experimented with learning rate and epoch and below are my observations:
+1) Learning rate = 0.01, epoch = 20
+
+ 
+ 
+
+The above figure plots loss vs epoch for train and validation dataset each. I observed that even though val accuracy was 90.59% the loss was not monotonically decreasing. So I have decided to update my learning rate and epoch and see how the graph changes.
+
+2) Learning rate = 0.055, epoch = 25
+
+ 
+ 
+The above figure plots loss vs epoch shows for learning rate=0.055, the model performed considerably good on train and validation data but the validation losses kept increasing which indicates that parameter optimization is still needed. Now since decreasing learning rate did not do much good, I have decided to increase the learning rate and keep epoch around 20 and see what my models parameters are.
+3) Learning rate = 0.02, epoch = 22
+
+ 
+Here I had increased learning rate to 0.02 and saw that my model has training accuracy of almost 100% and validation accuracy is above 90%. Below is the Loss Vs Epoch graph and when compared to above 2 graphs, I see a smooth decrease in validation loss and at the end of epochs the loss is less than what it has been initially.
+ 
+
+In this latest model, when the number of epochs =22 and learning rate was 0.02, the train accuracy was 99.98% which implies overfitting but the val accuracy was 90.46% which implies my model performed considerably well on some unknown data. If you observe the Loss vs Epoch graph, the val loss has decreased considerably and flattened out at the end. Since this model ticked boxes on all aspects, I consider this model to perform well on some unknown data and better suited for this project requirements.
+
+CONCLUSION:
+•	When learning is decreased, the model learns slowly and hence it lead to overfitting. This increased training accuracy, but the validation loss did not decrease.
+•	When the learning rate is increased, the model learns faster, but this does not change the training accuracy as it is still nearly 100%. But the validation loss kept decreasing and validation accuracy is above 90&
+•	Below are the accuracies of the model with learning rate = 0.02 and epoch =22
+Training accuracy =  0.9996587634086609
+Test accuracy =  0.9046173691749573 
