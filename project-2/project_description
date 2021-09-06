@@ -1,5 +1,5 @@
-Project Part-2
 Unsupervised Learning (K-means)
+
 Abstract:
 In this project I had implemented k-means algorithm using 2 different strategies of choosing the initial clusters to a dataset which contains a set of 2-D points. In strategy 1, the initial centers were picked randomly from the given samples while in strategy 2, the first center was picked randomly and for the i-th center (i>1) a sample was chosen amongst all possible samples such that the average distance of this chosen one to all previous (i-1) centers Is maximal. Each strategy was repeated 2 times with the number of clusters ranging from 2-10 and a plot between objective function VS number of clusters K under each strategy for each repetition was plotted to see the relationship between them.
 Objective Function: 
